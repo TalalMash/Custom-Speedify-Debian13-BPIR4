@@ -23,12 +23,8 @@ deploy_file "$BASE_DIR/systemd/flash_sync_network.service" "/etc/systemd/system/
 deploy_file "$BASE_DIR/bin/router-init.sh" "/usr/local/bin/router-init.sh" 755
 deploy_file "$BASE_DIR/bin/weston-vnc.sh" "/usr/local/bin/weston-vnc.sh" 755
 deploy_file "$BASE_DIR/bin/flash_sync_network.sh" "/usr/local/bin/flash_sync_network.sh" 755
+deploy_file "$BASE_DIR/config/rt_tables" "/etc/iproute2/rt_tables " 755
 
-echo "Updating /etc/iproute2/rt_tables..."
-while IFS= read -r line; do
-    grep -qxF "$line" /etc/iproute2/rt_tables || echo "$line" >> /etc/iproute2/rt_tables
-done < "$BASE_DIR/config/rt_tables"
-echo "/etc/iproute2/rt_tables updated"
 
 echo "Reloading systemd daemon..."
 systemctl daemon-reload
