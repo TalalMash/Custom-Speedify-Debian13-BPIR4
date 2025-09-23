@@ -1,18 +1,21 @@
 # Custom Speedify Debian13 BPIR4 Setup
 
 ## Current configuration and additions
-- LAN gateway: 192.168.1.1/24
-- DNS: 1.1.1.1 *
+- LAN gateway: `192.168.1.1` (/24)
+- DNS: `1.1.1.1` *
 #### * important for PBR leaks, can't use router as local resolver without advanced automation
 
 ### Ports
 | Hardware Names | USB | SFP-1 | SFP-2 | WAN | E1  | E2  | E3  |
 |----------------|-----|-------|-------|-----|-----|-----|-----|
-| Assigned Names | usb0 | -     | -     | wan1 | wan2 | brlan | brlan |
+| `networkd` names | usb0 | -     | -     | wan1 | wan2 | lanbr0 | lanbr0 |
 | Roles          | WAN  | -     | -     | WAN  | WAN  | LAN  | LAN  |
-| PBR Range 192.168.1.X      | -    | -     | -     | -    | 16 - 31 | 32 - 47 | - | - |
+| PBR Range 192.168.1.X      | -    | -     | -     |  16 - 31  | 32 - 47 | - | - | - |
 
 ### Features
+- Policy based routing pre-configured, reserved by DHCP:
+
+    Set a static IP on the client as indicated by the *Ports* table to choose which WAN to use.
 - LED indicator assignments:
     - Blue LED: CPU load - Heartbeat
     - Green LED: Speedify VPN tunnel status and TX/RX activity
@@ -20,8 +23,7 @@
 - Disabled IPv6 in kernel network stack needed for PBR and leaks
 - Non-blocking NTP time sync
 - Latest kernel with ethernet switch fixes using vanilla Debian from https://github.com/frank-w/BPI-Router-Linux
-- LAN speed test server running from https://github.com/TalalMash/speedtest-rust at http://192.168.1.1:8989
-- VNC based Speedify UI control to comply with TOS
+- Mobile friendly Speedify UI control over VNC to comply with Speedify Raspberry Pi sharing setup
 
     <img src="README-assets/weston.png" width="300"> 
 
@@ -45,25 +47,28 @@ In case of misconfiguration, accessing the router could be difficult, you can mo
 - Connect a stable internet connection to WAN (far left)
 - Run the following commands to clone this repository and automatically configure
 ```
+apt update
+apt install ntpsec-ntpdate
+
 ntpdate pool.ntp.org
 
 apt update
-apt install sudo wget curl rsync systemd-timesyncd ethtool weston
+apt install git wget curl rsync systemd-timesyncd ethtool weston
 
 bash -c "$(curl -sL https://get.speedify.com)" 
 apt install speedifyui
 
 #Imporant: Login from GUI doesn't work
 speedify_cli login username password
-# You can use auto for link login
-# speedify_cli login auto 
 speedify_cli startupconnect on
 
 # Default service disabled since it's unreliable with networkd and timesyncd, especially with all WANs down
 systemctl disable speedify
+systemctl stop speedify
 
-git clone https://github.com/TalalMash/Richard-Speedify-Debian13-BPIR4
-cd Richard-Speedify-Debian13-BPIR4
+
+git clone https://github.com/TalalMash/Custom-Speedify-Debian13-BPIR4
+cd Custom-Speedify-Debian13-BPIR4
 
 bash install.sh
 ```
