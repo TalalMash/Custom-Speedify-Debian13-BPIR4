@@ -78,6 +78,7 @@ bash install.sh
     This doesn't affect networking, there is however an annoying 10 second delay before Speedify UI appears. #FIXME
 - You need to select a server at least once from the UI or command like for auto connect on start/boot.
 
+#### You can modify the content of network, install script and setup folder on existing installation to update it.
 
 ## Experimental options
 ####  Disable common ethernet/TCP offload
