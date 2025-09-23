@@ -1,0 +1,13 @@
+[Unit]
+Description=Network recovery - sync USB flash to /etc/systemd/network
+After=local-fs.target
+Wants=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/flash_sync_network.sh
+RemainAfterExit=no
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

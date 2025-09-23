@@ -1,0 +1,28 @@
+[Match]
+Name=lan1
+
+[Network]
+BindCarrier=eth0
+#ConfigureWithoutCarrier=true
+
+DHCP=ipv4
+
+#static setup
+#Address=192.168.0.19/24
+#Gateway=192.168.0.10
+#DNS=192.168.0.10
+
+IPForward=yes
+
+[RoutingPolicyRule]
+Priority=102
+From=192.168.1.32/28
+#IP range: 192.168.1.32 → 192.168.1.47
+Table=102
+
+[Route]
+Destination=0.0.0.0/0
+Gateway=_dhcp4
+Table=102
+GatewayOnLink=yes
+

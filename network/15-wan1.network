@@ -1,0 +1,28 @@
+[Match]
+Name=wan
+
+[Network]
+BindCarrier=eth0
+#ConfigureWithoutCarrier=true
+
+DHCP=ipv4
+
+#static setup
+#Address=192.168.0.19/24
+#Gateway=192.168.0.10
+#DNS=192.168.0.10
+
+IPForward=yes
+
+[RoutingPolicyRule]
+Priority=101
+From=192.168.1.16/28
+#IP range: 192.168.1.16 → 192.168.1.31
+Table=101
+
+[Route]
+Destination=0.0.0.0/0
+Gateway=_dhcp4
+Table=101
+GatewayOnLink=yes
+
