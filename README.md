@@ -53,7 +53,7 @@ apt install ntpsec-ntpdate
 ntpdate pool.ntp.org
 
 apt update
-apt install git wget curl rsync systemd-timesyncd ethtool weston
+apt install git wget curl rsync systemd-timesyncd ethtool weston iptables
 
 bash -c "$(curl -sL https://get.speedify.com)" 
 apt install speedifyui
