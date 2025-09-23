@@ -53,7 +53,7 @@ apt install ntpsec-ntpdate
 ntpdate pool.ntp.org
 
 apt update
-apt install git wget curl rsync systemd-timesyncd ethtool weston iptables
+apt install git wget curl rsync systemd-timesyncd ethtool weston iptables htop 
 
 bash -c "$(curl -sL https://get.speedify.com)" 
 apt install speedifyui
@@ -73,11 +73,17 @@ cd Custom-Speedify-Debian13-BPIR4
 bash install.sh
 ```
 - Use RealVNC on phone/tablet/laptop with the default port on 192.168.1.1 to view Speedify UI
-- Note that everytime a new VNC connection is made, the GUI only is restarted due to a bug with Speedify running without audio adapter and relative mouse issue. This doesn't affect networking, there is however a 10 second delay before Speedify UI appears.
+- Note that everytime a new VNC connection is made, the GUI is restarted due to a bug with Wayland relative mouse with GTK apps. 
+
+    This doesn't affect networking, there is however an annoying 10 second delay before Speedify UI appears. #FIXME
+- You need to select a server at least once from the UI or command like for auto connect on start/boot.
 
 
 ## Experimental options
 ####  Disable common ethernet/TCP offload
+Useful for some ethernet USB devices and mobile hotspots.
+
+Can degrade multi-gig performance.
 
 `/etc/udev/rules.d/99-disable-offload.rules` 
 ```
