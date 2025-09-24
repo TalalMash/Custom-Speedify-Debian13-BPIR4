@@ -41,7 +41,7 @@ In case of misconfiguration, accessing the router could be difficult, you can mo
 - Use BalenaEtcher or any other imaging software with an SD card (8GB+)
 - Both latches should be down for SD card boot
 - Plug in ethernet to E3 (far right)
-- ssh to 192.168.1.1 with username 
+- SSH to 192.168.1.1 
     - Username: `root` 
     - Password: `bananapi`
 - Connect a stable internet connection to WAN (far left)
@@ -72,7 +72,7 @@ cd Custom-Speedify-Debian13-BPIR4
 
 bash install.sh
 ```
-- Use RealVNC on phone/tablet/laptop with the default port on 192.168.1.1 to view Speedify UI
+- Use RealVNC on phone/tablet/laptop with the default port on 192.168.1.1 to view Speedify UI, credential match SSH login
 - Note that everytime a new VNC connection is made, the GUI is restarted due to a bug with Wayland relative mouse with GTK apps. 
 
     This doesn't affect networking, there is however an annoying 10 second delay before Speedify UI appears. #FIXME
