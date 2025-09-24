@@ -17,7 +17,7 @@
 
     Set a static IP on the client as indicated by the *Ports* table to choose which WAN to use.
 - LED indicator assignments:
-    - Blue LED: CPU load - Heartbeat
+    - Blue LED: CPU load - Heartbeat (blue is preffered to be used the least due to low service life, e.g distant blinks)
     - Green LED: Speedify VPN tunnel status and TX/RX activity
 - BBR and FQ QDISC enabled for better uploads to distant servers as extensively tested
 - Disabled IPv6 in kernel network stack needed for PBR and leaks
@@ -72,19 +72,19 @@ cd Custom-Speedify-Debian13-BPIR4
 
 bash install.sh
 ```
-- Use RealVNC on phone/tablet/laptop with the default port on 192.168.1.1 to view Speedify UI, credential match SSH login
-- Note that everytime a new VNC connection is made, the GUI is restarted due to a bug with Wayland relative mouse with GTK apps. 
+- Use RealVNC on phone/tablet/laptop with the default port on 192.168.1.1 to view Speedify UI, credentials match SSH login
+- Note that everytime a new VNC connection is made, the GUI is restarted due to a bug with Wayland relative mouse with GTK apps 
 
-    This doesn't affect networking, there is however an annoying 10 second delay before Speedify UI appears. #FIXME
-- You need to select a server at least once from the UI or command like for auto connect on start/boot.
+    This doesn't affect networking, there is however an annoying 10 second delay before Speedify UI appears #FIXME
+- You need to select a server at least once from the UI or command for auto connect on start/boot.
 
-#### You can modify the content of network, install script and setup folder on existing installation to update it.
+#### To update, modify the content of network, install script and setup folder on existing installation, and re-run install.sh
 
 ## Experimental options
 ####  Disable common ethernet/TCP offload
 Useful for some ethernet USB devices and mobile hotspots.
 
-Can degrade multi-gig performance.
+Degrades multi-gig performance (untested).
 
 `/etc/udev/rules.d/99-disable-offload.rules` 
 ```
