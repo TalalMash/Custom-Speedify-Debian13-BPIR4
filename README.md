@@ -1,4 +1,4 @@
-# Custom Speedify Debian13 BPIR4 Setup
+# Custom Speedify on BananaPi R4 running Debian 13
 
 ## Current configuration and additions
 - LAN gateway: `192.168.1.1` (/24)
