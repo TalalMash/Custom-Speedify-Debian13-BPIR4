@@ -3,7 +3,8 @@
 ## Current configuration and additions
 - LAN gateway: `192.168.1.1` (/24)
 - DNS: `1.1.1.1` *
-#### * important for PBR leaks, can't use router as local resolver without advanced automation
+
+***Important to prevent PBR leaks, local resolver requires hotplug**
 
 ### Ports
 | Hardware Names | USB | SFP-1 | SFP-2 | WAN | E1  | E2  | E3  |
@@ -53,7 +54,7 @@ apt install ntpsec-ntpdate
 ntpdate pool.ntp.org
 
 apt update
-apt install git wget curl rsync systemd-timesyncd ethtool weston iptables htop 
+apt install sudo git wget curl rsync systemd-timesyncd ethtool weston iptables htop 
 
 bash -c "$(curl -sL https://get.speedify.com)" 
 apt install speedifyui
@@ -78,7 +79,12 @@ bash install.sh
     This doesn't affect networking, there is however an annoying 10 second delay before Speedify UI appears #FIXME
 - You need to select a server at least once from the UI or command for auto connect on start/boot.
 
-#### To update, modify the content of network, install script and setup folder on existing installation, and re-run install.sh
+**You can modify the content of network, install script and setup folder on existing installation to update it.**
+
+## Banana Pi R4 Known Issues
+- Mixing 100Mbit and 1Gbit devices on bridged LAN ports (2-3) cuts the gigabit port to half speed. 
+
+    Track issue here: https://forum.banana-pi.org/t/bpi-r4-bad-switch-performance-in-upload/17407
 
 ## Experimental options
 ####  Disable common ethernet/TCP offload
@@ -88,5 +94,5 @@ Degrades multi-gig performance (untested).
 
 `/etc/udev/rules.d/99-disable-offload.rules` 
 ```
-ACTION=="add", SUBSYSTEM=="net", KERNEL!="lo", RUN+="/usr/sbin/ethtool -K %k gro off gso off tso off rx off tx off"
+ACTION=="add", SUBSYSTEM=="net", KERNEL!="lo", RUN+="/usr/sbin/ethtool -K %k autoneg off gro off gso off tso off rx off tx off"
 ```
