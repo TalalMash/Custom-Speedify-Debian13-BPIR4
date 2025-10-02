@@ -1,0 +1,5 @@
+[Match]
+Name=wan2
+
+[Network]
+DHCP=yes

@@ -1,0 +1,26 @@
+[Match]
+Name=lanbr0
+
+[Network]
+BindCarrier=eth0
+
+
+#DHCP=ipv4
+
+#static setup
+Address=192.168.1.1/24
+#Gateway=192.168.0.10
+Domains=~.
+DNS=1.1.1.1
+
+IPForward=yes
+#needs iptables to be installed
+IPMasquerade=yes
+
+
+DHCPServer=yes
+
+[DHCPServer]
+PoolOffset=50
+PoolSize=200
+

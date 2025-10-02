@@ -1,0 +1,16 @@
+[Unit]
+Description=Weston VNC Compositor
+After=network.target router-init.service systemd-logind.service
+Wants=router-init.service
+
+[Service]
+User=root
+Environment=XDG_RUNTIME_DIR=/run/user/0
+ExecStart=/usr/local/bin/weston-vnc.sh
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
